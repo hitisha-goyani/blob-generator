@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>BlobCraft — Organic Shape Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- WAVE CANVAS -->
+  <canvas id="waveCanvas"></canvas>
+  <div class="grain"></div>
+
+  <!-- ═══════════════════════════════════
+       HEADER
+  ═══════════════════════════════════ -->
+  <header class="header" id="header">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-orb" id="headerBlob">
+        <svg viewBox="0 0 44 44" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <path id="orbPath" d="" fill="rgba(255,255,255,0.95)"/>
+        </svg>
+        <span class="brand-b">B</span>
+      </div>
+      <div class="brand-copy">
+        <span class="brand-name">BlobCraft</span>
+        <span class="brand-sub">by z creative labs</span>
+      </div>
+    </div>
+
+    <!-- Center marquee headline (desktop) -->
+    <div class="header-center">
+      <div class="marquee-wrap">
+        <div class="marquee-inner">
+          <span>Organic Shapes &nbsp;·&nbsp; SVG Export &nbsp;·&nbsp; Animated Morphing &nbsp;·&nbsp; Custom Colors &nbsp;·&nbsp; PNG Download &nbsp;·&nbsp;</span>
+          <span>Organic Shapes &nbsp;·&nbsp; SVG Export &nbsp;·&nbsp; Animated Morphing &nbsp;·&nbsp; Custom Colors &nbsp;·&nbsp; PNG Download &nbsp;·&nbsp;</span>
+        </div>
+      </div>
+      <div class="live-badge">
+        <span class="live-dot"></span>Live
+      </div>
+    </div>
+
+    <!-- Right nav -->
+    <nav class="header-nav">
+      <button class="hbtn icon-only" id="themeToggle" title="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="hbtn ghost" id="shareBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
+      <button class="hbtn primary" id="headerExport">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export
+      </button>
+      <button class="hamburger" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-inner">
+        <button class="drawer-close" id="drawerClose">✕</button>
+        <button class="drawer-link" id="drawerShare">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share
+        </button>
+        <button class="drawer-link" id="drawerExport">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export PNG
+        </button>
+        <button class="drawer-link" id="drawerSvg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Copy SVG
+        </button>
+        <button class="drawer-link" id="drawerTheme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+          Toggle Theme
+        </button>
+      </div>
+    </div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+  </header>
+
+  <!-- ═══════════════════════════════════
+       MAIN CANVAS
+  ═══════════════════════════════════ -->
+  <main class="main">
+    <div class="canvas-wrap" id="canvasWrapper">
+
+      <!-- Stats floating left -->
+      <div class="stats-card">
+        <div class="stat"><span class="stat-lbl">HEX</span><span class="stat-val" id="statColor">#FF0066</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-lbl">PTS</span><span class="stat-val" id="statPoints">6</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-lbl">GROW</span><span class="stat-val" id="statGrowth">50%</span></div>
+      </div>
+
+      <!-- Canvas frame -->
+      <div class="canvas-frame" id="canvasFrame">
+        <div class="frame-corner tl"></div>
+        <div class="frame-corner tr"></div>
+        <div class="frame-corner bl"></div>
+        <div class="frame-corner br"></div>
+
+        <svg id="blobSvg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+              <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="var(--accent)" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+          <path id="blobPath" d="" fill="var(--accent)" filter="url(#softShadow)"/>
+        </svg>
+
+        <button class="click-hint" id="clickHint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M15 15l6 6m-11-4a7 7 0 110-14 7 7 0 010 14z"/></svg>
+          Click · Press R
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════
+       TOOLBAR
+  ═══════════════════════════════════ -->
+  <div class="toolbar-shell">
+    <div class="toolbar" id="toolbar">
+
+      <!-- Color -->
+      <div class="tb-cell color-cell">
+        <label class="color-wrap" title="Pick color">
+          <input type="color" id="colorPicker" value="#FF0066" />
+          <span class="color-ring" id="colorRing">
+            <span class="color-dot" id="colorDot" style="background:#FF0066"></span>
+          </span>
+        </label>
+        <span class="hex-tag" id="hexDisplay">#FF0066</span>
+      </div>
+
+      <div class="tb-div"></div>
+
+      <!-- Complexity -->
+      <div class="tb-cell slider-cell">
+        <div class="sl-header">
+          <span class="sl-name">Complexity</span>
+          <span class="sl-num" id="complexityVal">6</span>
+        </div>
+        <input type="range" class="tb-range" id="complexitySlider" min="3" max="9" value="6" />
+      </div>
+
+      <div class="tb-div"></div>
+
+      <!-- Growth -->
+      <div class="tb-cell slider-cell">
+        <div class="sl-header">
+          <span class="sl-name">Growth</span>
+          <span class="sl-num" id="growthVal">50%</span>
+        </div>
+        <input type="range" class="tb-range" id="growthSlider" min="10" max="90" value="50" />
+      </div>
+
+      <div class="tb-div"></div>
+
+      <!-- Buttons -->
+      <div class="tb-cell btn-cell">
+        <button class="tb-btn" id="animateBtn" title="Animate (A)">
+          <svg id="animIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <button class="tb-btn" id="randomBtn" title="Randomize (R)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </button>
+        <button class="tb-btn" id="svgBtn" title="Copy SVG (S)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </button>
+        <button class="tb-btn filled" id="pngBtn" title="Download PNG (D)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <p class="kb-row"><kbd>R</kbd> Random &nbsp;·&nbsp;<kbd>A</kbd> Animate &nbsp;·&nbsp;<kbd>S</kbd> SVG &nbsp;·&nbsp;<kbd>D</kbd> PNG</p>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="waves.js"></script>
+  <script src="blob.js"></script>
+</body>
+</html>
